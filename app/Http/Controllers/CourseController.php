@@ -15,7 +15,7 @@ class CourseController extends Controller
     }
 
     public function seedCourses() {
-        \Artisan::call('db:seed');
+        \Artisan::call('course:seed');
         return response()->json([
             'message' => '50 courses seeded successfully'
         ]);
@@ -67,7 +67,7 @@ class CourseController extends Controller
     public function Courses() {
         $courses = Course::all();
 
-        if ($courses) {
+        if (!empty($courses)) {
             $status = true;
             $errors = [];
             $message = "List of Registered Courses was successful";
@@ -87,7 +87,7 @@ class CourseController extends Controller
         $user_id = $this->guard()->user()->id;
         $courses = Course::where('user_id', '=', $user_id)->get();
 
-        if ($courses) {
+        if (!empty($courses)) {
             $status = true;
             $errors = [];
             $message = "List of Registered Courses by user was successful";

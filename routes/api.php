@@ -7,7 +7,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
 });
 
-Route::group(['prefix' => 'courses'], function () {
+Route::group(['prefix' => 'course'], function () {
     Route::get('lists', 'CourseController@Courses');
     Route::get('list', 'CourseController@listCourses');
     Route::post('add', 'CourseController@addCourse');
