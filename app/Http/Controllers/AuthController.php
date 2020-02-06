@@ -109,20 +109,4 @@ class AuthController extends Controller
         return $this->sendResult($message, $data, $errors, $status);
     }
 
-    // public function me()
-    // {
-    //     return response()->json($this->guard()->user());
-    // }
-
-    // public function refresh()
-    // {
-    //     return $this->respondWithToken($this->guard()->refresh());
-    // }
-
-    // public function logout()
-    // {
-    //     $this->guard()->logout();
-
-    //     return response()->json(['message' => 'Successfully logged out']);
-    // }
 }
