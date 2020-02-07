@@ -49,7 +49,7 @@ class CourseController extends Controller
         $data['user_id'] = $user_id;
         $course = Register::create($data);
 
-        if ($course) {
+        if (!empty($course)) {
             $status = true;
             $errors = [];
             $message = "Course registered successfully";
@@ -71,32 +71,12 @@ class CourseController extends Controller
         if (!empty($courses)) {
             $status = true;
             $errors = [];
-            $message = "List of Registered Courses was successful";
+            $message = "Courses list was successful";
             $data = $courses;
         }else {
             $status = false;
             $errors = [
-                "Course" => "Registered Courses was not listed successfully",
-            ];
-            $message = "Courses list failed";
-        }
-
-        return $this->sendResult($message, $data, $errors, $status);
-    }
-
-    public function listCourses() {
-        $user_id = $this->guard()->user()->id;
-        $courses = Course::where('user_id', '=', $user_id)->get();
-
-        if (!empty($courses)) {
-            $status = true;
-            $errors = [];
-            $message = "List of Registered Courses by user was successful";
-            $data = $courses;
-        }else {
-            $status = false;
-            $errors = [
-                "Course" => "Registered Courses was not listed successfully",
+                "Course" => "Courses list was not successful",
             ];
             $message = "Courses list failed";
         }

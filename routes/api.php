@@ -9,7 +9,6 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'course'], function () {
     Route::get('lists', 'CourseController@Courses');
-    Route::get('list', 'CourseController@listCourses');
     Route::post('register', 'CourseController@registerCourse');
     Route::get('seed', 'CourseController@seedCourses');
     Route::get('export', 'CourseController@export');

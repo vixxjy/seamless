@@ -1,4 +1,4 @@
-## API DOCS INSTRUCTIONS
+## API DOCS INSTRUCTIONAL GUIDE
   This docs will guide you on how to use the created apis.
 
 ## How to use
@@ -21,7 +21,6 @@ METHOD | DESCRIPTION | ENDPOINTS
 POST   | User registration | `/api/auth/register`
 POST   | User log in | `/api/auth/login`
 GET    | Get all courses | `/api/course/lists`
-GET    | Get user registered courses | `/api/course/list`
-POST    | Course Registration | `/api/course/add`
+POST    | Course Registration | `/api/course/register`
 GET   | Creat 50 course records   | `/api/course/seed`
 GET   | Get all courses as excel  | `/api/course/export`
