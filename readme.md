@@ -11,7 +11,7 @@
 ## Testing On Postman
 - Set Content-Type to application/json
 - Set Accept to application/json
-- Set the Authorization Token for all endpoints except /api/auth/login and /api/auth/register
+- Set the Authorization Token for all endpoints except /api/auth/login, /api/auth/register and /api/course/export
 
 ## API Information
 
