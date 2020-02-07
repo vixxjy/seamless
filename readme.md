@@ -9,7 +9,6 @@
 - Run php artisan serve
 
 ## Testing On Postman
-Ensure the Headers are updated to the following:
 - Set Content-Type to application/json
 - Set Accept to application/json
 - Set the Authorization Token for all endpoints except /api/auth/login and /api/auth/register
