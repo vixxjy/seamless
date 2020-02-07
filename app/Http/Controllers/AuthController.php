@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Repositories\Authentication\AuthContract;
 
 class AuthController extends Controller
 {
-    public function __construct()
+    protected $repo;
+    
+    public function __construct(AuthContract $AuthContract)
     {
+        $this->repo = $AuthContract;
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
@@ -56,13 +59,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = new User([
-            'name' => $request->input('name'),
-    		'email' => $request->input('email'),
-    		'password' => bcrypt($request->input('password'))
-        ]);
-        
-        $user->save();
+        $user = $this->repo->addUser($request);
          
         $token = $this->guard()->login($user);
 

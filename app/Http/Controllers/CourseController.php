@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Course;
-use App\Register;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\CourseExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Repositories\Courses\CourseContract;
 
 class CourseController extends Controller
 {
-    public function __construct()
+    protected $repo;
+
+    public function __construct(CourseContract $CourseContract)
     {
+        $this->repo = $CourseContract;
         $this->middleware('auth:api', ['except' => ['export']]);
     }
 
@@ -43,11 +46,9 @@ class CourseController extends Controller
     }
 
     public function registerCourse(Request $request) {
-        $data = $request->all();
 
         $user_id = $this->guard()->user()->id;
-        $data['user_id'] = $user_id;
-        $course = Register::create($data);
+        $course = $this->repo->addCourse($request, $user_id);
 
         if (!empty($course)) {
             $status = true;
@@ -60,13 +61,14 @@ class CourseController extends Controller
              "Course" => "Course was not registered successfully",
             ];
             $message = "Course registration failed";
+            $data = 'none';
         }
 
         return $this->sendResult($message, $data, $errors, $status);
     }
 
     public function Courses() {
-        $courses = Course::all();
+        $courses = $this->repo->getAllCourses();
 
         if (!empty($courses)) {
             $status = true;
@@ -79,6 +81,7 @@ class CourseController extends Controller
                 "Course" => "Courses list was not successful",
             ];
             $message = "Courses list failed";
+            $data = 'none';
         }
 
         return $this->sendResult($message, $data, $errors, $status);
