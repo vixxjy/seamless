@@ -11,8 +11,7 @@ $factory->define(Course::class, function (Faker $faker) {
         'text' => $faker->sentence,
         'note' => $faker->sentence,
         'code' => $faker->numberBetween(10, 1000),
-        'lecturer' => $faker->word,
-        'user_id' => 1,
+        'lecturer' => $faker->word
     ];
 });
 

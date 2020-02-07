@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Course;
+use App\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\CourseExport;
@@ -41,24 +42,24 @@ class CourseController extends Controller
         return response()->json($result, $errorCode);
     }
 
-    public function addCourse(Request $request) {
+    public function registerCourse(Request $request) {
         $data = $request->all();
 
         $user_id = $this->guard()->user()->id;
         $data['user_id'] = $user_id;
-        $course = Course::create($data);
+        $course = Register::create($data);
 
         if ($course) {
             $status = true;
             $errors = [];
-            $message = "Course Created successfully";
+            $message = "Course registered successfully";
             $data = $course;
         }else {
             $status = false;
             $errors = [
-                "Course" => "Course was not added successfully",
+             "Course" => "Course was not registered successfully",
             ];
-            $message = "Course creation failed";
+            $message = "Course registration failed";
         }
 
         return $this->sendResult($message, $data, $errors, $status);
